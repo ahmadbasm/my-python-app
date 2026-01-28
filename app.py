@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello from Python & Docker CI/CD!"
+    return "return CI/CD is working perfectly!"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
