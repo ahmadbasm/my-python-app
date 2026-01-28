@@ -1,0 +1,27 @@
+name: Build and Push to Docker Hub
+
+# متى يعمل هذا الأكشن؟ عند كل Push لفرع main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          # استبدل ahmadthabet باسم مستخدم Docker Hub الخاص بك
+          tags: ahmadthabet/my-python-app:latest
